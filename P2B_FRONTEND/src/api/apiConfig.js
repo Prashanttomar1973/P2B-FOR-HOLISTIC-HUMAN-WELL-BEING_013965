@@ -6,7 +6,18 @@
  *   - Local:      http://localhost:8080
  *   - Production: https://your-railway-app.up.railway.app
  */
-export const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+let rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080').trim();
+
+// Protocol auto-fix: agar URL ke aage https:// ya http:// nahi laga ho toh add karein
+if (rawBaseUrl && !rawBaseUrl.startsWith('http://') && !rawBaseUrl.startsWith('https://')) {
+  if (rawBaseUrl.startsWith('localhost')) {
+    rawBaseUrl = `http://${rawBaseUrl}`;
+  } else {
+    rawBaseUrl = `https://${rawBaseUrl}`;
+  }
+}
+
+export const BASE_URL = rawBaseUrl.replace(/\/+$/, '');
 
 export const API_ENDPOINTS = {
   // Auth

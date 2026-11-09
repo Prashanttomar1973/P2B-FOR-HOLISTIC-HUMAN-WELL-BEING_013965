@@ -6,8 +6,8 @@ import axios from 'axios';
 import { API_ENDPOINTS } from '../api/apiConfig';
 
 
-// Google Client ID is now loaded from .env file
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "761502021813-2eic56n8vrf1k57cd26u3ghura3sm7qk.apps.googleusercontent.com";
+// Google Client ID is now loaded from .env file or defaults to user's active client ID
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "45720202777-19g6cairb4rt7e1urvcmi853ge09fphp.apps.googleusercontent.com";
 
 const AccountSettingsAuth = ({ externalControl = false, show = false, onHide = () => {}, isLoggedIn: externalLoggedIn = false }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(externalLoggedIn);
@@ -95,7 +95,7 @@ const AccountSettingsAuth = ({ externalControl = false, show = false, onHide = (
           if (googleBtnContainer) {
             google.accounts.id.renderButton(
               googleBtnContainer,
-              { theme: "outline", size: "large", width: "100%", text: "continue_with" }
+              { theme: "outline", size: "large", width: 320, text: "continue_with" }
             );
           }
         }
@@ -271,7 +271,7 @@ const AccountSettingsAuth = ({ externalControl = false, show = false, onHide = (
               </div>
 
               <div className="or-divider mb-4"><span>or</span></div>
-              <div id="google-button-div" className="w-100 mb-3" style={{ minHeight: '40px' }}></div>
+              <div id="google-button-div" className="w-100 mb-3 d-flex justify-content-center" style={{ minHeight: '40px' }}></div>
               <p className="terms-text text-center mt-4 text-muted mx-auto">
                 By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
               </p>
